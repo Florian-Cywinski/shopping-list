@@ -28,6 +28,17 @@ function onAddItemSubmit(e) {   // e is the event object
     return;
   }
 
+  // Check for edit mode
+  if (isEditMode) { //If the item is in the edit mode
+    const itemToEdit = itemList.querySelector('.edit-mode');  //Selects the item which is in the edit mode with the class edit mode
+    removeItemFromStorage(itemToEdit.textContent);  //To remove the item from local storage
+    itemToEdit.classList.remove('edit-mode'); //To remove the class 'edit-mode' from the item to edit
+    itemToEdit.remove();  //To remove the item from the DOM (UI)
+
+    isEditMode = false; //Re-sets the status of the edit mode
+
+  }
+
   // Create item DOM element
   addItemToDOM(newItem);
 
@@ -183,8 +194,9 @@ function filterItems(e) {
 }
 
 
-// Checks whether items are in the item list
+// Checks whether items are in the item list - kind of reset
 function checkUI() {
+  itemInput.value = ''; //Resets the input field
   const items = itemList.querySelectorAll('li');  //All listed items - it has to be in the function scope so that it is requested every time the function is invoked
   
   if (items.length === 0) { //If there is no item in the item list
@@ -194,6 +206,12 @@ function checkUI() {
     clearBtn.style.display = 'block'; // Displays the Clear All button as block
     itemFilter.style.display = 'block'; // Displays the filter field as block    
   }
+
+  // Sets the button properties back to default after edit mode
+  formBtn.innerHTML = '<i class="fa-solid fa-plus"></i>Add Item';
+  formBtn.style.backgroundColor = '#333';
+
+  isEditMode = false; //Resets the status of the edit mode
 }
 
 
