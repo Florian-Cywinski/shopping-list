@@ -37,6 +37,11 @@ function onAddItemSubmit(e) {   // e is the event object
 
     isEditMode = false; //Re-sets the status of the edit mode
 
+  } else {  //To check whether the item already exists
+    if (checkIfItemExists(newItem)) {
+      alert('That item already exists!');
+      return;
+    }
   }
 
   // Create item DOM element
@@ -119,6 +124,13 @@ function onClickItem(e) {
   } else {
     setItemToEdit(e.target);
   }
+}
+
+
+// To prevent duplicates - a function to check whether a item already exists
+function checkIfItemExists(item) {
+  const itemsFromStorage = getItemsFromStorage(); //To get all items in an array
+  return itemsFromStorage.includes(item); //Returns true or false
 }
 
 
