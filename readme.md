@@ -2,6 +2,8 @@
 
 A simple shopping list app from Brad Trversy's 'Modern JS From The Beginning' course.
 
+Try out the app :) - https://creative-alpaca-d82176.netlify.app/
+
 The app includes the following functionalities:
 
 01. Add items
